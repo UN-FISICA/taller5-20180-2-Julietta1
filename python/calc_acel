@@ -1,9 +1,24 @@
 #!/usr/bin/python3
-import argparse
+from scipy.misc import imread
+import numpy as np
 from calc_mod import *
+import argparse
+parser=argparse.ArgumentParser()
+parser.add_argument("-imname","--archivo",type=str,help="Nombre del archivo a procesar")
+parser.add_argument("-hz","--frecuencia",type=float,help="Frecuencia de la lampara estroboscopica en hertz")
+parser.add_argument("-dx","--pixel",type=float,help="Tamano de cada pixel en mm")
+args=parser.parse_args() #args guarda las entradas
+archivo=args.archivo 
+hz=args.frecuencia
+dx=args.pixel 
+imagen=imread(archivo)
+f,c,n=imagen.shape   
+bw=np.zeros((f,c))    #Crea la matriz que contendrá la imagen en escsala de grises
+for i in range(f):
+    for j in range(c):
+        pix=(int(imagen[i,j][0])+int(imagen[i,j][1])+int(imagen[i,j][2]))/3
+        bw[i,j]=pix
+if __name__=="__main__":
+    print(calc(bw,hz,dx))
 
-
-
-if __name__ =="__main__":
-    print("***")
    
