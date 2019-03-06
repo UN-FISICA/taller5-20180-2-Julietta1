@@ -4,5 +4,5 @@ from Cython.Build import cythonize
 #python setup.py build_ext --inplace
 
 setup(
-    ext_modules = cythonize("calc_acel.pyx","calc_mod.pyx")
+    ext_modules = cythonize("calc_mod.pyx")
 )
